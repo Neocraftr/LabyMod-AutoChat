@@ -8,4 +8,4 @@ Minecraft LabyMod Addon, das vordefinierte Nachrichten automatisch in einem best
 - **\#autochat add** - Füget eine Nachricht zur Listen hinzu. (Nachricht anschließend in den Chat schreiben.)
 - **\#autochat remove <Nummer>** - Entfernt eine Nachricht von der Liste.
 
-Anstatt **#autochat** kann auch der Befehl **#ac** §everwendet werden.
+Anstatt **#autochat** kann auch der Befehl **#ac** verwendet werden.

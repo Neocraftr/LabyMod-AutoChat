@@ -44,7 +44,7 @@ public class ChatListener implements MessageSendEvent {
                         } else Main.instance.getApi().displayMessageInChat(Main.prefix+"§cVerwendung: #autochat remove <Nummer>");
                     } else if(args[1].equalsIgnoreCase("info") || args[1].equalsIgnoreCase("i")) {
                         String infoText = "";
-                        infoText += "\n§8---------------------- §2AutoChat §8----------------------";
+                        infoText += "\n§7---------------------- §2AutoChat §7----------------------";
                         infoText += "\n§eNachrichten:";
                         for(int i=0; i<Main.messages.size(); i++) {
                             infoText += "\n§8- §a§l"+i+" §7"+Main.instance.colorize(Main.messages.get(i));
@@ -52,7 +52,7 @@ public class ChatListener implements MessageSendEvent {
                         if(Main.messages.size() == 0) infoText += "\n§cKeine Nachrichten vorhanden.";
                         infoText += "\n§eNachrichteninterval: §a"+Main.interval+" Sekunden";
                         infoText += "\n§eAktiviert: "+(Main.active ? "§aJa" : "§cNein");
-                        infoText += "\n§8------------------------------------------------------";
+                        infoText += "\n§7----------------------------------------------------";
                         Main.instance.getApi().displayMessageInChat(infoText);
                     } else if(args[1].equalsIgnoreCase("interval")) {
                         if(args.length == 3) {

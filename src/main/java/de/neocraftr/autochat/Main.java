@@ -64,7 +64,7 @@ public class Main extends LabyModAddon {
 
     public void printHelp() {
         String helpText = "";
-        helpText += "\n§8---------------------- §2AutoChat §8----------------------";
+        helpText += "\n§7---------------------- §2AutoChat §7----------------------";
         helpText += "\n§eBefehle:";
         helpText += "\n§a#autochat help §7- §aZeigt alle verfügbaren Befehle an.";
         helpText += "\n§a#autochat on/off §7- §aSchaltet Autochat an oder aus.";
@@ -72,7 +72,7 @@ public class Main extends LabyModAddon {
         helpText += "\n§a#autochat add §7- §aFüget eine Nachricht zur Listen hinzu.";
         helpText += "\n§a#autochat remove <Nummer> §7- §aEntfernt eine Nachricht von der Liste.";
         helpText += "\n§eAnstatt §a#autochat §ekann auch der Befehl §a#ac §everwendet werden. Die Nachrichten werden nach zufälliger Reihenfolge gesenset. Es wird keine Nachricht 2-mal hintereinander gesendet.";
-        helpText += "\n§8------------------------------------------------------";
+        helpText += "\n§7----------------------------------------------------";
         getApi().displayMessageInChat(helpText);
     }
 }

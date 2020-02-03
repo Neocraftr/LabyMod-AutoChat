@@ -2,7 +2,7 @@
   "uuid": "%uuid%",
   "name": "AutoChat",
   "mainClass": "de.neocraftr.autochat.Main",
-  "description": "Automatically sends predefined chat messages for you. Help with: #autotext help",
+  "description": "Automatically sends predefined chat messages for you. Help with: #autochat help",
   "version": 1,
   "author": "Neocraftr",
   "category": 2
