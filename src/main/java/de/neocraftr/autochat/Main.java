@@ -71,6 +71,7 @@ public class Main extends LabyModAddon {
         helpText += "\n§a#autochat info/i §7- §aZeigt die aktuellen Einstellungen an.";
         helpText += "\n§a#autochat add §7- §aFüget eine Nachricht zur Listen hinzu.";
         helpText += "\n§a#autochat remove <Nummer> §7- §aEntfernt eine Nachricht von der Liste.";
+        helpText += "\n§a#autochat interval <Zeit in Sekunden> §7- §aStellt die Dauer zwischen den Nachrichten ein.";
         helpText += "\n§eAnstatt §a#autochat §ekann auch der Befehl §a#ac §everwendet werden. Die Nachrichten werden nach zufälliger Reihenfolge gesenset. Es wird keine Nachricht 2-mal hintereinander gesendet.";
         helpText += "\n§7----------------------------------------------------";
         getApi().displayMessageInChat(helpText);
