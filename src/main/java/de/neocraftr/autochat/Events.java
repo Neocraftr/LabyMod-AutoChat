@@ -13,11 +13,17 @@ public class Events {
                 if (Main.counter >= Main.interval * 20) {
                     Main.counter = 0;
                     int numMessages = Main.messages.size();
-                    if (numMessages != 0) {
+                    if(numMessages == 1) {
+                        Main.lastMessage = 0;
+                        Main.mc.getPlayer().sendChatMessage(Main.messages.get(0));
+                    } else if (numMessages > 1) {
                         int random = Main.random.nextInt(numMessages - 1);
+                        System.out.print(random+"   ");
                         if (random == Main.lastMessage) {
-                            if (numMessages > 1) random++;
+                            random++;
+                            if(random > numMessages - 1) random = 0;
                         }
+                        System.out.println(random);
                         Main.lastMessage = random;
                         Main.mc.getPlayer().sendChatMessage(Main.messages.get(random));
                     }
