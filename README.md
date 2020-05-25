@@ -12,7 +12,7 @@ Minecraft LabyMod Addon, das vordefinierte Nachrichten automatisch in einem best
 Anstatt **.autochat** kann auch der Befehl **.ac** verwendet werden.
 
 ### Installation
-Download: https://github.com/Neocraftr/LabyMod-Scammerliste/releases
+Download: https://github.com/Neocraftr/LabyMod-AutoChat/releases
 
 Verschiebe die Datei in den Addons Ordner von LabyMod:
 |Betriebssystem |Dateipfad                                                 |
