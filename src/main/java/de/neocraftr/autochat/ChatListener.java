@@ -18,7 +18,7 @@ public class ChatListener implements MessageSendEvent {
 
         String[] args = msg.split(" ");
         if(args.length >= 1) {
-            if(args[0].equalsIgnoreCase("#autochat") || args[0].equalsIgnoreCase("#ac")) {
+            if(args[0].equalsIgnoreCase(".autochat") || args[0].equalsIgnoreCase(".ac")) {
                 if(args.length >= 2) {
                     if(args[1].equalsIgnoreCase("on")) {
                         Main.counter = Main.interval*20;
@@ -41,7 +41,7 @@ public class ChatListener implements MessageSendEvent {
                             } catch (IndexOutOfBoundsException e) {
                                 Main.instance.getApi().displayMessageInChat(Main.prefix+"§cDiese Nummer befindet sich nicht in der Liste.");
                             }
-                        } else Main.instance.getApi().displayMessageInChat(Main.prefix+"§cVerwendung: #autochat remove <Nummer>");
+                        } else Main.instance.getApi().displayMessageInChat(Main.prefix+"§cVerwendung: .autochat remove <Nummer>");
                     } else if(args[1].equalsIgnoreCase("info") || args[1].equalsIgnoreCase("i")) {
                         String infoText = "";
                         infoText += "\n§7---------------------- §2AutoChat §7----------------------";
@@ -63,7 +63,7 @@ public class ChatListener implements MessageSendEvent {
                             } catch(NumberFormatException e) {
                                 Main.instance.getApi().displayMessageInChat(Main.prefix+"§cBitte gib eine gültige Zahl an.");
                             }
-                        } else Main.instance.getApi().displayMessageInChat(Main.prefix+"§cVerwendung: #autochat interval <Nachrichteninterval in Sekunden>");
+                        } else Main.instance.getApi().displayMessageInChat(Main.prefix+"§cVerwendung: .autochat interval <Nachrichteninterval in Sekunden>");
                     } else Main.instance.printHelp();
                 } else Main.instance.printHelp();
                 return true;
