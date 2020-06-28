@@ -11,3 +11,13 @@ Minecraft LabyMod Addon, das vordefinierte Nachrichten automatisch in einem best
 - **\.autochat interval \<Zeit in Sekunden\>** - Stellt die Dauer zwischen den Nachrichten ein.
 
 Anstatt **.autochat** kann auch der Befehl **.ac** verwendet werden.
+
+### Installation
+Download: https://github.com/Neocraftr/LabyMod-AutoChat/releases
+
+Verschiebe die Datei in den Addons Ordner von LabyMod:
+|Betriebssystem |Dateipfad                                                 |
+|---------------|----------------------------------------------------------|
+|Windows        |%APPDATA%\\.minecraft\\LabyMod\\addons-1.8                |
+|Linux          |~/.minecraft/LabyMod/addons-1.8                           |
+|macOS          |~/Library/Application Support/minecraft/LabyMod/addons-1.8|
