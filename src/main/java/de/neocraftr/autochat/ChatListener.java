@@ -27,6 +27,8 @@ public class ChatListener implements MessageSendEvent {
                     } else if(args[1].equalsIgnoreCase("off")) {
                         Main.active = false;
                         Main.instance.getApi().displayMessageInChat(Main.prefix+"§cAutochat deaktiviert.");
+                    } else if(args[1].equalsIgnoreCase("once")) {
+                        Main.instance.sendRandomMessage();
                     } else if(args[1].equalsIgnoreCase("add")) {
                         Main.saveMessage = true;
                         Main.instance.getApi().displayMessageInChat(Main.prefix+"§aSchreibe die Nachricht, die hinzugefügt werden soll, in den Chat. §cSchreibe \"cancel\" zum Abbrechen.");

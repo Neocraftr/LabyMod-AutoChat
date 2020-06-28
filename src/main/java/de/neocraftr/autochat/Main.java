@@ -62,12 +62,29 @@ public class Main extends LabyModAddon {
         return msg.replace("&", "§");
     }
 
+    public void sendRandomMessage() {
+        int numMessages = messages.size();
+        if(numMessages == 1) {
+            lastMessage = 0;
+            mc.getPlayer().sendChatMessage(messages.get(0));
+        } else if (numMessages > 1) {
+            int random = Main.random.nextInt(numMessages - 1);
+            if (random == lastMessage) {
+                random++;
+                if(random > numMessages - 1) random = 0;
+            }
+            lastMessage = random;
+            mc.getPlayer().sendChatMessage(messages.get(random));
+        }
+    }
+
     public void printHelp() {
         String helpText = "";
         helpText += "\n§7---------------------- §2AutoChat §7----------------------";
         helpText += "\n§eBefehle:";
         helpText += "\n§a.autochat help §7- §aZeigt alle verfügbaren Befehle an.";
         helpText += "\n§a.autochat on/off §7- §aSchaltet Autochat an oder aus.";
+        helpText += "\n§a.autochat once §7- §aSendet eine einzelne zufällige Nachricht.";
         helpText += "\n§a.autochat info/i §7- §aZeigt die aktuellen Einstellungen an.";
         helpText += "\n§a.autochat add §7- §aFüget eine Nachricht zur Listen hinzu.";
         helpText += "\n§a.autochat remove <Nummer> §7- §aEntfernt eine Nachricht von der Liste.";
