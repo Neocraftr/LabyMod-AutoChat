@@ -1,13 +1,13 @@
 package de.neocraftr.autochat;
 
 import com.google.gson.Gson;
-import de.neocraftr.autochat.events.ChatListener;
+import de.neocraftr.autochat.events.ChatReceiveListener;
+import de.neocraftr.autochat.events.ChatSendListener;
 import de.neocraftr.autochat.events.TickListener;
 import de.neocraftr.autochat.settings.ArraySettingsElement;
 import net.labymod.api.LabyModAddon;
 import net.labymod.core.LabyModCore;
 import net.labymod.settings.elements.*;
-import net.labymod.utils.Consumer;
 import net.labymod.utils.Material;
 
 import java.util.*;
@@ -28,7 +28,8 @@ public class AutoChat extends LabyModAddon {
     public void onEnable() {
         setAutoChat(this);
         setGson(new Gson());
-        getApi().getEventManager().register(new ChatListener());
+        getApi().getEventManager().register(new ChatSendListener());
+        getApi().getEventManager().register(new ChatReceiveListener());
         getApi().registerForgeListener(new TickListener());
     }
 

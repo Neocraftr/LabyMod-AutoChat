@@ -4,7 +4,7 @@ import net.labymod.api.events.MessageSendEvent;
 
 import java.util.StringJoiner;
 
-public class ChatListener implements MessageSendEvent {
+public class ChatSendListener implements MessageSendEvent {
 
     @Override
     public boolean onSend(String msg) {
@@ -13,14 +13,22 @@ public class ChatListener implements MessageSendEvent {
             if(args[0].equalsIgnoreCase(".autochat") || args[0].equalsIgnoreCase(".ac")) {
                 if(args.length >= 2) {
                     if(args[1].equalsIgnoreCase("on")) {
-                        getAutoChat().setNextSendMessage(0);
-                        getAutoChat().setActive(true);
-                        getAutoChat().getApi().displayMessageInChat(AutoChat.PREFIX+"§aAutochat aktiviert.");
+                        if(getAutoChat().getMessages().size() > 0) {
+                            getAutoChat().setNextSendMessage(0);
+                            getAutoChat().setActive(true);
+                            getAutoChat().getApi().displayMessageInChat(AutoChat.PREFIX+"§aAutochat aktiviert.");
+                        } else {
+                            getAutoChat().getApi().displayMessageInChat(AutoChat.PREFIX+"§cBitte füge mindestens eine Nachricht in den Einstellungen hinzu.");
+                        }
                     } else if(args[1].equalsIgnoreCase("off")) {
                         getAutoChat().setActive(false);
                         getAutoChat().getApi().displayMessageInChat(AutoChat.PREFIX+"§cAutochat deaktiviert.");
                     } else if(args[1].equalsIgnoreCase("once")) {
-                        getAutoChat().sendRandomMessage();
+                        if(getAutoChat().getMessages().size() > 0) {
+                            getAutoChat().sendRandomMessage();
+                        } else {
+                            getAutoChat().getApi().displayMessageInChat(AutoChat.PREFIX+"§cBitte füge mindestens eine Nachricht in den Einstellungen hinzu.");
+                        }
                     } else if(args[1].equalsIgnoreCase("info") || args[1].equalsIgnoreCase("i")) {
                         StringJoiner joiner = new StringJoiner("\n");
                         joiner.add("§7---------------------- §2AutoChat §7----------------------");
