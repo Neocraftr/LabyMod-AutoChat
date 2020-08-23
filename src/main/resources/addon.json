@@ -1,7 +1,7 @@
 {
   "uuid": "%uuid%",
   "name": "AutoChat",
-  "mainClass": "de.neocraftr.autochat.Main",
+  "mainClass": "de.neocraftr.autochat.AutoChat",
   "description": "Automatically sends predefined chat messages for you. Help with: #autochat help",
   "version": 1,
   "author": "Neocraftr",
