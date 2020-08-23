@@ -14,6 +14,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiYesNo;
+import net.minecraft.client.gui.GuiYesNoCallback;
 import net.minecraft.client.renderer.GlStateManager;
 import org.apache.commons.codec.language.bm.Lang;
 
@@ -62,13 +63,16 @@ public class ArraySettingsElementGui extends GuiScreen {
         switch (button.id) {
         case 1:
             lastScreen = (Minecraft.getMinecraft()).currentScreen;
-            Minecraft.getMinecraft().displayGuiScreen(new GuiYesNo((result, id) -> {
-                if (result) {
-                    elements.remove(selectedIndex);
-                    changeListener.accept(elements);
+            Minecraft.getMinecraft().displayGuiScreen(new GuiYesNo(new GuiYesNoCallback() {
+                @Override
+                public void confirmClicked(boolean result, int id) {
+                    if (result) {
+                        elements.remove(selectedIndex);
+                        changeListener.accept(elements);
+                    }
+                    Minecraft.getMinecraft().displayGuiScreen(lastScreen);
+                    selectedIndex = -1;
                 }
-                Minecraft.getMinecraft().displayGuiScreen(lastScreen);
-                selectedIndex = -1;
             }, "Soll diese Nachricht wirklich gelöscht werden?", AutoChat.getAutoChat().colorize(elements.get(this.selectedIndex)),
                     1));
             break;
