@@ -1,9 +1,10 @@
 {
   "uuid": "%uuid%",
   "name": "AutoChat",
-  "mainClass": "de.neocraftr.autochat.AutoChat",
+  "icon": "https://raw.githubusercontent.com/Neocraftr/LabyMod-AutoChat/master/icon/AutoChat.png",
+  "author": "Neocraftr",
   "description": "Automatically sends predefined chat messages for you. Help with: #autochat help",
   "version": 1,
-  "author": "Neocraftr",
-  "category": 2
+  "category": 2,
+  "mainClass": "de.neocraftr.autochat.AutoChat"
 }
