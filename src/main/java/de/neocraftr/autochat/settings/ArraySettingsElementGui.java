@@ -16,7 +16,6 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiYesNo;
 import net.minecraft.client.gui.GuiYesNoCallback;
 import net.minecraft.client.renderer.GlStateManager;
-import org.apache.commons.codec.language.bm.Lang;
 
 public class ArraySettingsElementGui extends GuiScreen {
     private Scrollbar scrollbar = new Scrollbar(29);

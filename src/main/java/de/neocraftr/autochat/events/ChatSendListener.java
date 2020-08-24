@@ -13,7 +13,7 @@ public class ChatSendListener implements MessageSendEvent {
             if(args[0].equalsIgnoreCase(".autochat") || args[0].equalsIgnoreCase(".ac")) {
                 if(args.length >= 2) {
                     if(args[1].equalsIgnoreCase("on")) {
-                        if(getAutoChat().getMessages().size() > 0) {
+                        if(getAutoChat().getSettings().getMessages().size() > 0) {
                             getAutoChat().setNextSendMessage(0);
                             getAutoChat().setActive(true);
                             getAutoChat().getApi().displayMessageInChat(AutoChat.PREFIX+"§aAutochat aktiviert.");
@@ -24,7 +24,7 @@ public class ChatSendListener implements MessageSendEvent {
                         getAutoChat().setActive(false);
                         getAutoChat().getApi().displayMessageInChat(AutoChat.PREFIX+"§cAutochat deaktiviert.");
                     } else if(args[1].equalsIgnoreCase("once")) {
-                        if(getAutoChat().getMessages().size() > 0) {
+                        if(getAutoChat().getSettings().getMessages().size() > 0) {
                             getAutoChat().sendRandomMessage();
                         } else {
                             getAutoChat().getApi().displayMessageInChat(AutoChat.PREFIX+"§cBitte füge mindestens eine Nachricht in den Einstellungen hinzu.");
@@ -33,11 +33,11 @@ public class ChatSendListener implements MessageSendEvent {
                         StringJoiner joiner = new StringJoiner("\n");
                         joiner.add("§7---------------------- §2AutoChat §7----------------------");
                         joiner.add("§eNachrichten:");
-                        for(int i = 0; i< getAutoChat().getMessages().size(); i++) {
-                            joiner.add("§8- §a§l"+i+" §7"+ getAutoChat().colorize(getAutoChat().getMessages().get(i)));
+                        for(int i = 0; i< getAutoChat().getSettings().getMessages().size(); i++) {
+                            joiner.add("§8- §a§l"+i+" §7"+ getAutoChat().colorize(getAutoChat().getSettings().getMessages().get(i)));
                         }
-                        if(getAutoChat().getMessages().size() == 0) joiner.add("\n§cKeine Nachrichten vorhanden.");
-                        joiner.add("§eNachrichteninterval: §a"+getAutoChat().getInterval()+" Sekunden");
+                        if(getAutoChat().getSettings().getMessages().size() == 0) joiner.add("\n§cKeine Nachrichten vorhanden.");
+                        joiner.add("§eNachrichteninterval: §a"+getAutoChat().getSettings().getInterval()+" Sekunden");
                         joiner.add("§eAktiviert: "+(getAutoChat().isActive() ? "§aJa" : "§cNein"));
                         joiner.add("§7----------------------------------------------------");
                         getAutoChat().getApi().displayMessageInChat(joiner.toString());

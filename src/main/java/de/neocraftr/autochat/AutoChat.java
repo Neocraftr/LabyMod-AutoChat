@@ -4,11 +4,10 @@ import com.google.gson.Gson;
 import de.neocraftr.autochat.events.ChatReceiveListener;
 import de.neocraftr.autochat.events.ChatSendListener;
 import de.neocraftr.autochat.events.TickListener;
-import de.neocraftr.autochat.settings.ArraySettingsElement;
+import de.neocraftr.autochat.settings.Settings;
 import net.labymod.api.LabyModAddon;
 import net.labymod.core.LabyModCore;
 import net.labymod.settings.elements.*;
-import net.labymod.utils.Material;
 
 import java.util.*;
 
@@ -18,9 +17,8 @@ public class AutoChat extends LabyModAddon {
 
     private static AutoChat autoChat;
     private Gson gson;
+    private Settings settings;
     private boolean active = false;
-    private ArrayList<String> messages = new ArrayList<>();
-    private int interval = 60;
     private long nextSendMessage = 0;
     private int lastMessage = -1;
 
@@ -28,6 +26,7 @@ public class AutoChat extends LabyModAddon {
     public void onEnable() {
         setAutoChat(this);
         setGson(new Gson());
+        setSettings(new Settings());
         getApi().getEventManager().register(new ChatSendListener());
         getApi().getEventManager().register(new ChatReceiveListener());
         getApi().registerForgeListener(new TickListener());
@@ -35,35 +34,12 @@ public class AutoChat extends LabyModAddon {
 
     @Override
     public void loadConfig() {
-        if(getConfig().has("messages")) {
-            setMessages(getGson().fromJson(getConfig().get("messages"), ArrayList.class));
-        }
-        if(getConfig().has("interval")) {
-            setInterval(getConfig().get("interval").getAsInt());
-        }
+        getSettings().loadConfig();
     }
 
     @Override
     protected void fillSettings(List<SettingsElement> settings) {
-        final NumberElement intervalSetting = new NumberElement("Nachrichten Interval",
-                new ControlElement.IconData(Material.WATCH), getInterval());
-        intervalSetting.setMinValue(1);
-        intervalSetting.addCallback(interval -> {
-            setInterval(interval);
-            getConfig().addProperty("interval", interval);
-            saveConfig();
-        });
-        settings.add(intervalSetting);
-
-        final ArraySettingsElement messagesSetting = new ArraySettingsElement("Nachrichten",
-                new ControlElement.IconData(Material.BOOK_AND_QUILL), getMessages(), messages -> {
-                    setMessages(messages);
-                    getConfig().add("messages", getGson().toJsonTree(messages));
-                    saveConfig();
-                });
-        settings.add(messagesSetting);
-
-        settings.add(new HeaderElement("§7Übersicht Befehle: .autochat help"));
+        getSettings().fillSettings(settings);
     }
 
     public String colorize(String msg) {
@@ -71,18 +47,18 @@ public class AutoChat extends LabyModAddon {
     }
 
     public void sendRandomMessage() {
-        int numMessages = getMessages().size();
+        int numMessages = getSettings().getMessages().size();
         if(numMessages == 1) {
             setLastMessage(0);
-            LabyModCore.getMinecraft().getPlayer().sendChatMessage(getMessages().get(0));
+            LabyModCore.getMinecraft().getPlayer().sendChatMessage(getSettings().getMessages().get(0));
         } else if (numMessages > 1) {
-            int random = new Random().nextInt(numMessages - 1);
-            if (random == getLastMessage()) {
+            int random = new Random().nextInt(numMessages);
+            if (random == getLastMessage() && !getSettings().isAllowDuplicate()) {
                 random++;
                 if(random > numMessages - 1) random = 0;
             }
             setLastMessage(random);
-            LabyModCore.getMinecraft().getPlayer().sendChatMessage(getMessages().get(random));
+            LabyModCore.getMinecraft().getPlayer().sendChatMessage(getSettings().getMessages().get(random));
         }
     }
 
@@ -100,25 +76,18 @@ public class AutoChat extends LabyModAddon {
         this.gson = gson;
     }
 
+    public Settings getSettings() {
+        return settings;
+    }
+    public void setSettings(Settings settings) {
+        this.settings = settings;
+    }
+
     public boolean isActive() {
         return active;
     }
     public void setActive(boolean active) {
         this.active = active;
-    }
-
-    public ArrayList<String> getMessages() {
-        return messages;
-    }
-    public void setMessages(ArrayList<String> messages) {
-        this.messages = messages;
-    }
-
-    public int getInterval() {
-        return interval;
-    }
-    public void setInterval(int interval) {
-        this.interval = interval;
     }
 
     public long getNextSendMessage() {

@@ -1,7 +1,6 @@
 package de.neocraftr.autochat.settings;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import net.labymod.main.lang.LanguageManager;
 import org.lwjgl.input.Keyboard;
@@ -28,8 +27,8 @@ public class ArraySettingsElementGuiAdd extends GuiScreen {
     public void initGui() {
         super.initGui();
         Keyboard.enableRepeatEvents(true);
-        this.fieldText = new ModTextField(-1, (LabyMod.getInstance().getDrawUtils()).fontRenderer, this.width / 2 - 100,
-                this.height / 2 - 50, 200, 20);
+        this.fieldText = new ModTextField(-1, (LabyMod.getInstance().getDrawUtils()).fontRenderer, this.width / 2 - 200,
+                this.height / 2 - 50, 400, 20);
         this.fieldText.setMaxStringLength(100);
         this.fieldText.setDisabledTextColour(1);
         this.buttonList
@@ -48,8 +47,12 @@ public class ArraySettingsElementGuiAdd extends GuiScreen {
 
     @Override
     protected void keyTyped(char typedChar, int keyCode) throws IOException {
-        if (this.fieldText.textboxKeyTyped(typedChar, keyCode))
+        if (this.fieldText.textboxKeyTyped(typedChar, keyCode)) {
+            if(this.fieldText.getText().length() > 100) {
+                this.fieldText.setText(this.fieldText.getText().substring(0, 100));
+            }
             this.newText = this.fieldText.getText();
+        }
         this.buttonDone.enabled = (!this.newText.isEmpty());
         super.keyTyped(typedChar, keyCode);
     }
@@ -92,7 +95,8 @@ public class ArraySettingsElementGuiAdd extends GuiScreen {
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         drawDefaultBackground();
         this.fieldText.drawTextBox();
-        LabyMod.getInstance().getDrawUtils().drawString("Nachricht:", (this.width / 2 - 100), (this.height / 2 - 65));
+        LabyMod.getInstance().getDrawUtils().drawString("Nachricht:", (this.width / 2 - 200), (this.height / 2 - 65));
+        LabyMod.getInstance().getDrawUtils().drawString("§7"+this.fieldText.getText().length()+"/100", (this.width / 2 - 200), (this.height / 2 - 10));
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
 }
