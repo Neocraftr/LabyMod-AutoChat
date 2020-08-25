@@ -110,23 +110,24 @@ public class ArraySettingsElementGui extends GuiScreen {
     }
 
     private double drawEntry(int index, String value, double y, int mouseX, int mouseY) {
-        int x = this.width / 2 - 100;
-        List<String> list = LabyMod.getInstance().getDrawUtils().listFormattedStringToWidth(value, x + 40);
-        boolean hovered = (mouseX > x && mouseX < x + 200 && mouseY > y && mouseY < y + 24.0D && mouseX > 32
-                && mouseY < this.height - 32);
-        if (hovered)
-            this.hoveredIndex = index;
+        value = AutoChat.getAutoChat().colorize(value);
+        int x = this.width / 2 - 140;
+        List<String> list = LabyMod.getInstance().getDrawUtils().listFormattedStringToWidth(value, 132 * 2);
+        boolean hovered = (mouseX > x - 5 && mouseX < x + 280 && mouseY > y - 4 && mouseY < y + 24.0D + ((list.size() > 1) ? (5 * list.size()) : 0)
+                && mouseX > 32 && mouseY < this.height - 32);
+        if (hovered) this.hoveredIndex = index;
         int borderColor = (this.selectedIndex == index) ? ModColor.toRGB(240, 240, 240, 240) : Integer.MIN_VALUE;
         int backgroundColor = hovered ? ModColor.toRGB(50, 50, 50, 120) : ModColor.toRGB(30, 30, 30, 120);
-        drawRect(x - 5, (int) y - 4, x + 200, (int) y + 24 + ((list.size() > 1) ? (5 * list.size()) : 0),
+        drawRect(x - 5, (int) y - 4, x + 280, (int) y + 24 + ((list.size() > 1) ? (5 * list.size()) : 0),
                 backgroundColor);
-        LabyMod.getInstance().getDrawUtils().drawRectBorder((x - 5), ((int) y - 4), (x + 200),
+        LabyMod.getInstance().getDrawUtils().drawRectBorder((x - 5), ((int) y - 4), (x + 280),
                 ((int) y + 24 + ((list.size() > 1) ? (5 * list.size()) : 0)), borderColor, 1.0D);
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
         for (int i = 0; i < list.size(); i++) {
             String element = list.get(i);
-            LabyMod.getInstance().getDrawUtils().drawString(AutoChat.getAutoChat().colorize(element), (x + 5), y + 5.0D + (i * 10.0D));
+            String colorCodes = i != 0 ? getLastColors(list.get(i - 1)) : "";
+            LabyMod.getInstance().getDrawUtils().drawString(colorCodes+element, (x + 5), y + 5.0D + (i * 10.0D));
         }
         return 29.0D + ((list.size() > 1) ? (list.size() * 5.0D) : 0);
     }
@@ -155,5 +156,25 @@ public class ArraySettingsElementGui extends GuiScreen {
     public void handleMouseInput() throws IOException {
         super.handleMouseInput();
         this.scrollbar.mouseInput();
+    }
+
+    public String getLastColors(String input) {
+        String result = "";
+        int length = input.length();
+
+        for (int index = length - 1; index > -1; index--) {
+            char section = input.charAt(index);
+            if (section == '§' && index < length - 1) {
+                char c = input.charAt(index + 1);
+                if("0123456789abcdef".indexOf(c) != -1) {
+                    result = "§"+c+result;
+                    break;
+                } else if("klmno".indexOf(c) != -1) {
+                    result = "§"+c+result;
+                }
+            }
+        }
+
+        return result;
     }
 }

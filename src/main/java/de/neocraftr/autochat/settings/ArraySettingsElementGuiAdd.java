@@ -96,7 +96,7 @@ public class ArraySettingsElementGuiAdd extends GuiScreen {
         drawDefaultBackground();
         this.fieldText.drawTextBox();
         LabyMod.getInstance().getDrawUtils().drawString("Nachricht:", (this.width / 2 - 200), (this.height / 2 - 65));
-        LabyMod.getInstance().getDrawUtils().drawString("§7"+this.fieldText.getText().length()+"/100", (this.width / 2 - 200), (this.height / 2 - 10));
+        LabyMod.getInstance().getDrawUtils().drawString("§7"+this.fieldText.getText().length()+"/100", (this.width / 2 - 200), (this.height / 2 - 22));
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
 }
