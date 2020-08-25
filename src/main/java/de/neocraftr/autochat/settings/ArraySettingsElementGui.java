@@ -40,7 +40,7 @@ public class ArraySettingsElementGui extends GuiScreen {
     public void initGui() {
         super.initGui();
         this.scrollbar.init();
-        this.scrollbar.setPosition(this.width / 2 + 102, 44, this.width / 2 + 106, this.height - 32 - 3);
+        this.scrollbar.setPosition(this.width / 2 + 142, 44, this.width / 2 + 146, this.height - 32 - 3);
         this.scrollbar.setSpeed(10);
         this.buttonList
                 .add(this.buttonRemove = new GuiButton(1, this.width / 2 - 120, this.height - 26, 75, 20, LanguageManager.translateOrReturnKey("button_remove")));
@@ -92,16 +92,17 @@ public class ArraySettingsElementGui extends GuiScreen {
         if (this.addElementScreen)
             return;
         this.hoveredIndex = -1;
-        double yPos = 45.0D + this.scrollbar.getScrollY() + 3.0D;
+        double entryHeights = 0;
         for (int i = 0; i < elements.size(); i++) {
             String element = elements.get(i);
-            yPos += drawEntry(i, element, yPos, mouseX, mouseY);
+            entryHeights += drawEntry(i, element, (entryHeights + 45.0D + this.scrollbar.getScrollY() + 3.0D), mouseX, mouseY);
         }
         LabyMod.getInstance().getDrawUtils().drawOverlayBackground(0, 41);
         LabyMod.getInstance().getDrawUtils().drawOverlayBackground(this.height - 32, this.height);
         LabyMod.getInstance().getDrawUtils().drawGradientShadowTop(41.0D, 0.0D, this.width);
         LabyMod.getInstance().getDrawUtils().drawGradientShadowBottom((this.height - 32), 0.0D, this.width);
         LabyMod.getInstance().getDrawUtils().drawCenteredString(title, (this.width / 2), 25.0D);
+        this.scrollbar.setEntryHeight(entryHeights / elements.size());
         this.scrollbar.update(elements.size());
         this.scrollbar.draw();
         this.buttonEdit.enabled = (this.selectedIndex != -1);
