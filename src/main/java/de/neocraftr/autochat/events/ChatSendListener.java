@@ -52,12 +52,11 @@ public class ChatSendListener implements MessageSendEvent {
     private void printHelp() {
         StringJoiner joiner = new StringJoiner("\n");
         joiner.add("§7---------------------- §2AutoChat §7----------------------");
-        joiner.add("§eBefehle:");
-        joiner.add("§a.autochat help §7- §aZeigt alle verfügbaren Befehle an.");
-        joiner.add("§a.autochat on/off §7- §aSchaltet Autochat an oder aus.");
-        joiner.add("§a.autochat once §7- §aSendet eine einzelne zufällige Nachricht.");
-        joiner.add("§a.autochat info/i §7- §aZeigt die aktuellen Einstellungen an.");
-        joiner.add("§eAnstatt §a.autochat §ekann auch der Befehl §a.ac §everwendet werden. Die Nachrichten werden nach zufälliger Reihenfolge gesenset. Es wird keine Nachricht 2-mal hintereinander gesendet.");
+        joiner.add("§eVerfügbare Befehle:");
+        joiner.add("§a.autochat help §7- §eZeigt alle verfügbaren Befehle an.");
+        joiner.add("§a.autochat on/off §7- §eSchaltet Autochat an oder aus.");
+        joiner.add("§a.autochat once §7- §eSendet eine einzelne zufällige Nachricht.");
+        joiner.add("§a.autochat info/i §7- §eZeigt die aktuellen Einstellungen an.");
         joiner.add("§7----------------------------------------------------");
         getAutoChat().getApi().displayMessageInChat(joiner.toString());
     }

@@ -63,7 +63,7 @@ public class Settings {
         });
         settings.add(messagesSetting);
 
-        settings.add(new HeaderElement("§7Übersicht Befehle: .autochat help"));
+        settings.add(new HeaderElement("§7Übersicht Befehle: §e.autochat help"));
     }
 
     private JsonObject getConfig() {

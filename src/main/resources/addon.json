@@ -3,7 +3,7 @@
   "name": "AutoChat",
   "icon": "https://raw.githubusercontent.com/Neocraftr/LabyMod-AutoChat/master/icon/AutoChat.png",
   "author": "Neocraftr",
-  "description": "Automatically sends predefined chat messages for you. Help with: #autochat help",
+  "description": "Automatically sends predefined chat messages for you.",
   "version": 1,
   "category": 2,
   "mainClass": "de.neocraftr.autochat.AutoChat"
