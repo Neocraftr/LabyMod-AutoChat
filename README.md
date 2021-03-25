@@ -1,6 +1,8 @@
 # LabyMod-AutoChat
 Minecraft LabyMod Addon, das vordefinierte Nachrichten automatisch in einem bestimmten Interval sendet. Die Reihenfolge der Nachrichten ist zufällig und es wird nie einen Nachricht 2-mal hintereinander gesendet.
 
+**Unterstützte Versionen:** LabyMod 1.8.9 Vanilla/Forge
+
 ### Verfügbare Befehle:
 - **\.autochat help** - Zeigt alle verfügbaren Befehle an.
 - **\.autochat on/off** - Schaltet Autochat an oder aus.

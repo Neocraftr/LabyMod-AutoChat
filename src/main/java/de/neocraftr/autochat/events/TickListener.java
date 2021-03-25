@@ -10,7 +10,7 @@ public class TickListener {
 
     @SubscribeEvent
     public void onTick(TickEvent.ClientTickEvent e) {
-        if(e.phase == TickEvent.Phase.START) {
+        if(e.phase == TickEvent.Phase.END) {
             if (getAutoChat().isActive()) {
                 if(!getAutoChat().getApi().isIngame() || getAutoChat().getSettings().getMessages().size() == 0) {
                     getAutoChat().setActive(false);
