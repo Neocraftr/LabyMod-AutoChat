@@ -45,10 +45,9 @@ public class Settings {
         }, isVaryInterval());
         settings.add(varyIntervalBtn);
 
-        final NumberElement intervalSetting = new NumberElement("Nachrichten Interval",
+        final TimeElement intervalSetting = new TimeElement("Nachrichten Interval (mm:ss)",
                 new ControlElement.IconData(Material.WATCH), getInterval());
-        intervalSetting.setMinValue(1);
-        intervalSetting.addCallback(interval -> {
+        intervalSetting.setCallback(interval -> {
             setInterval(interval);
             getConfig().addProperty("interval", interval);
             saveConfig();

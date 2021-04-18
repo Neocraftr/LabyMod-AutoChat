@@ -2,9 +2,12 @@ package de.neocraftr.autochat.events;
 import de.neocraftr.autochat.AutoChat;
 import net.labymod.api.events.MessageSendEvent;
 
+import java.text.SimpleDateFormat;
 import java.util.StringJoiner;
 
 public class ChatSendListener implements MessageSendEvent {
+
+    private SimpleDateFormat timeFormat = new SimpleDateFormat("mm:ss");
 
     @Override
     public boolean onSend(String msg) {
@@ -30,14 +33,21 @@ public class ChatSendListener implements MessageSendEvent {
                             getAutoChat().getApi().displayMessageInChat(AutoChat.PREFIX+"§cBitte füge mindestens eine Nachricht in den Einstellungen hinzu.");
                         }
                     } else if(args[1].equalsIgnoreCase("info") || args[1].equalsIgnoreCase("i")) {
+                        String nextMessageTime = "-";
+                        if(getAutoChat().isActive()) {
+                            nextMessageTime = timeFormat.format(getAutoChat().getNextSendMessage() - System.currentTimeMillis());
+                        }
+                        String messageInterval = timeFormat.format(getAutoChat().getSettings().getInterval() * 1000);
+
                         StringJoiner joiner = new StringJoiner("\n");
                         joiner.add("§7---------------------- §2AutoChat §7----------------------");
                         joiner.add("§eNachrichten:");
-                        for(int i = 0; i< getAutoChat().getSettings().getMessages().size(); i++) {
-                            joiner.add("§8- §a§l"+i+" §7"+ getAutoChat().colorize(getAutoChat().getSettings().getMessages().get(i)));
+                        for(String message : getAutoChat().getSettings().getMessages()) {
+                            joiner.add("§a§l>> §7"+getAutoChat().colorize(message));
                         }
                         if(getAutoChat().getSettings().getMessages().size() == 0) joiner.add("\n§cKeine Nachrichten vorhanden.");
-                        joiner.add("§eNachrichteninterval: §a"+getAutoChat().getSettings().getInterval()+" Sekunden");
+                        joiner.add("§eNachrichteninterval: §a"+messageInterval);
+                        joiner.add("§eNächste Nachricht: §a"+nextMessageTime);
                         joiner.add("§eAktiviert: "+(getAutoChat().isActive() ? "§aJa" : "§cNein"));
                         joiner.add("§7----------------------------------------------------");
                         getAutoChat().getApi().displayMessageInChat(joiner.toString());

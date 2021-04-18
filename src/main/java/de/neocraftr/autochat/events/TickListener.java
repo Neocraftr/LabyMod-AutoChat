@@ -24,8 +24,7 @@ public class TickListener {
                         if(rnd.nextBoolean()) randomPercent *= -1;
                         additionalTime = (int) (getAutoChat().getSettings().getInterval() * randomPercent);
                     }
-                    getAutoChat().setNextSendMessage(System.currentTimeMillis() + (getAutoChat().getSettings().getInterval() + additionalTime) * 1000);
-
+                    getAutoChat().setNextSendMessage(System.currentTimeMillis() + (getAutoChat().getSettings().getInterval() + additionalTime) * 1000L);
                     getAutoChat().sendRandomMessage();
                 }
             }
